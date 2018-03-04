@@ -40,11 +40,30 @@ ShowTag=1
 ShowCommonAttributes=0
 
 [Entity]
+PName=trn_upsert
+LName=登録更新テスト
+Comment=
+TableOption=
+Page=MAIN
+Left=500
+Top=500
+Field="登録更新内部ID","upsert_mid","bigserial","NOT NULL",0,"","",$FFFFFFFF,""
+Field="登録更新ルートID","upsert_root_id","varchar(5)","NOT NULL",,"","",$FFFFFFFF,""
+Field="登録更新ID","upsert_id","varchar(50)","NOT NULL",,"","",$FFFFFFFF,""
+Field="登録更新名","upsert_name","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
+Field="順序","sort_num","integer",,,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20180304185015
+Position="MAIN",500,500,475,177
+
+[Entity]
 PName=trn_test
 LName=テスト
 Comment=
 TableOption=
-Page=Main
+Page=MAIN
 Left=850
 Top=100
 Field="テスト内部ID","test_mid","bigserial","NOT NULL",0,"","",$FFFFFFFF,""
@@ -55,4 +74,4 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20180303081403
-Position="Main",850,100,487,148
+Position="MAIN",850,100,487,148

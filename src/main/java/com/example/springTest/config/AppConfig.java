@@ -7,12 +7,11 @@
  */
 package com.example.springTest.config;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import org.seasar.doma.SingletonConfig;
 import org.seasar.doma.jdbc.Config;
+import org.seasar.doma.jdbc.SimpleDataSource;
 import org.seasar.doma.jdbc.dialect.Dialect;
 import org.seasar.doma.jdbc.dialect.PostgresDialect;
 import org.seasar.doma.jdbc.tx.LocalTransactionDataSource;
@@ -31,15 +30,15 @@ public class AppConfig implements Config {
     private final TransactionManager transactionManager;
 
     private AppConfig() {
-        try {
-            dialect = new PostgresDialect();
-            DataSource dataSource = (DataSource) InitialContext.doLookup("java:jboss/jdbc/MADS");
-            localTransactionDataSource = new LocalTransactionDataSource(dataSource);
-            transactionManager = new LocalTransactionManager(
-                    localTransactionDataSource.getLocalTransaction(getJdbcLogger()));
-        } catch (NamingException e) {
-            throw new RuntimeException(e);
-        }
+        dialect = new PostgresDialect();
+//            DataSource dataSource = (DataSource) InitialContext.doLookup("java:jboss/jdbc/MADS");
+		SimpleDataSource dataSource = new SimpleDataSource();
+		dataSource.setUrl("jdbc:postgresql://localhost:5432/postgres");
+		dataSource.setUser("postgres");
+		dataSource.setPassword("root");
+		localTransactionDataSource = new LocalTransactionDataSource(dataSource);
+		transactionManager = new LocalTransactionManager(
+		        localTransactionDataSource.getLocalTransaction(getJdbcLogger()));
     }
     @Override
     public Dialect getDialect() {
