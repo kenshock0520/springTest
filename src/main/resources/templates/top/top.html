@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Sample Demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/dist/bootstrap/css/bootstrap.min.css" th:href="@{/dist/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+    <script src="/dist/jquery/jquery-3.3.1.min.js" th:src="@{/dist/jquery/jquery-3.3.1.min.js}"></script>
+    <script src="/dist/popper/popper.js" th:src="@{/dist/popper/popper.js}"></script>
+    <script src="/dist/bootstrap/js/bootstrap.min.js" th:src="@{/dist/bootstrap/js/bootstrap.min.js}"></script>
+	<h1>Spring Sample</h1>
+	<div>
+    	Post Data
+	</div>
+	<br />
+	<form method="post" action="formPost">
+		<span>userId: </span>
+		<span th:text="${form.userId}"></span>
+		<br />
+		<span>password: </span>
+		<span th:text="${form.password}"></span>
+		<br />
+	</form>
+	<table>
+		<tr th:each="obj:${data}">
+			<td th:text="${obj.userId}"></td>
+			<td th:text="${obj.userName}"></td>
+			<td th:text="${obj.mailAddress}"></td>
+		</tr>
+	</table>
+</body>
+</html>

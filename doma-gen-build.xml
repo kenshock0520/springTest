@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<project name="doma-gen-example" default="gen" basedir=".">
+
+  <property name="javaDestDir" value="src/main/java/"/><!-- エンティティ、DAOが作成されるルート -->
+  <property name="sqlDestDir" value="src/main/resources/"/><!-- SQLファイルが作成されるルート -->
+  <property name="dialectName" value="postgres"/><!-- 利用するデータベース -->
+  <property name="driverClassName" value="org.postgresql.Driver"/><!-- jdbcドライバ -->
+  <property name="url" value="jdbc:postgresql://localhost:5432/postgres"/><!-- 接続先 -->
+  <property name="user" value="postgres"/><!-- ユーザー -->
+  <property name="password" value="root"/><!-- パスワード -->
+  <property name="entityPackageName" value="com.example.springTest.domain.entity"/><!-- エンティティが作成されるパッケージ -->
+  <property name="daoPackageName" value="com.example.springTest.domain.repository"/><!-- DAOが作成されるパッケージ -->
+  <property name="configClassName" value="com.example.springTest.config.AppConfig"/><!-- AppConfigの場所 -->
+  <property name="sqlFilePattern" value="META-INF/**/*.sql"/><!-- SQLファイルが作成されるフォルダ -->
+
+  <path id="classpath">
+    <fileset dir="lib"/>
+  </path>
+
+  <taskdef name="gen" classname="org.seasar.doma.extension.gen.task.Gen" classpathref="classpath" loaderref="loader"/>
+  <typedef name="entityConfig" classname="org.seasar.doma.extension.gen.task.EntityConfig" loaderref="loader"/>
+  <typedef name="daoConfig" classname="org.seasar.doma.extension.gen.task.DaoConfig" loaderref="loader"/>
+  <typedef name="sqlConfig" classname="org.seasar.doma.extension.gen.task.SqlConfig" loaderref="loader"/>
+
+  <target name="gen">
+    <gen
+      dialectName="${dialectName}"
+      driverClassName="${driverClassName}"
+      url="${url}"
+      user="${user}"
+      password="${password}">
+      <entityConfig
+        destdir="${javaDestDir}"
+        packageName="${entityPackageName}"
+      />
+      <daoConfig
+        destdir="${javaDestDir}"
+        packageName="${daoPackageName}"
+        configClassName="${configClassName}"
+      />
+      <sqlConfig
+        destdir="${sqlDestDir}"
+      />
+    </gen>
+  </target>
+
+</project>
