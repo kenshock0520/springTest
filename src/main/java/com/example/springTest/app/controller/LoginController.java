@@ -10,6 +10,7 @@ package com.example.springTest.app.controller;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,9 @@ public class LoginController {
 
     @Autowired
     TestService testService;
+
+    @Value("${test.value}")
+    String value;
 
 	@RequestMapping(value = {"/login"}, method = {RequestMethod.GET})
 	public ModelAndView index(@ModelAttribute LoginForm form) {
@@ -60,6 +64,7 @@ public class LoginController {
 
 		System.out.println("格納");
 		mv.addObject("data", testService.getTests());
+		mv.addObject("dataValue",value);
 
 		// 返却
 		return mv;
@@ -81,6 +86,7 @@ public class LoginController {
 
 		System.out.println("格納");
 		mv.addObject("data", testService.getTests());
+		mv.addObject("dataValue",value);
 
 		// 返却
 		return mv;

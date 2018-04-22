@@ -30,6 +30,7 @@ public class TestService {
     @Autowired
     TrnUpsertDao trnUpsertDao;
 
+
     public List<TrnTest> getTests() {
         return trnTestDao.selectAll();
     }

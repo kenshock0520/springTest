@@ -91,6 +91,12 @@
 
 	<build>
 		<finalName>springTest</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -98,6 +104,25 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	    <profiles>
+        <profile>
+            <id>Local</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <activeProfies>Local</activeProfies>
+            </properties>
+        </profile>
+        <profile>
+            <id>STG</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+            	<activeProfies>STG</activeProfies>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>
