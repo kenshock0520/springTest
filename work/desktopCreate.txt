@@ -1,3 +1,0 @@
-desktopCreate
-テストです。
-UTF-8に変更
