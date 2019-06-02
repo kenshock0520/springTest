@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Sample Demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="/dist/bootstrap/css/bootstrap.min.css" th:href="@{/dist/bootstrap/css/bootstrap.min.css}">
+	<style type="text/css">
+		.card .card-header a[data-toggle="collapse"] {
+		  display: block;
+		  padding: .75rem 1.25rem;
+		  margin: -.75rem -1.25rem;
+		}
+		.card .card-header a[data-toggle="collapse"]:active,
+		.card .card-header a[data-toggle="collapse"]:hover,
+		.card .card-header a[data-toggle="collapse"]:focus {
+		  text-decoration: none; //リンクテキストの下線を消す
+		}
+	</style>
+</head>
+<body>
+    <script src="/dist/jquery/jquery-3.3.1.min.js" th:src="@{/dist/jquery/jquery-3.3.1.min.js}"></script>
+    <script src="/dist/popper/popper.js" th:src="@{/dist/popper/popper.js}"></script>
+    <script src="/dist/bootstrap/js/bootstrap.min.js" th:src="@{/dist/bootstrap/js/bootstrap.min.js}"></script>
+	<h1>チェッカー</h1>
+	<div id="accordion" role="tablist" aria-multiselectable="true">
+	  <div class="card mb-2">
+	    <div class="card-header" role="tab" id="headingOne">
+	      <h5 class="mb-0">
+	        <a class="text-dark" data-toggle="collapse" href="#collapseOne" role="button" aria-expanded="true" aria-controls="collapseOne">
+	          操作方法
+	        </a>
+	      </h5>
+	    </div><!-- /.card-header -->
+	    <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+	      <div class="card-body">
+	        ①v1.1.2のログを取得し貼り付ける
+	      </div><!-- /.card-body -->
+	    </div><!-- /.collapse -->
+	  </div><!-- /.card -->
+	  <div class="card mb-2">
+	    <div class="card-header" role="tab" id="headingTwo">
+	      <h5 class="mb-0">
+	        <a class="collapsed text-dark" data-toggle="collapse" href="#collapseTwo" role="button" aria-expanded="false" aria-controls="collapseTwo">
+	          チェック内容
+	        </a>
+	      </h5>
+	    </div><!-- /.card-header -->
+	    <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo" data-parent="#accordion">
+	      <div class="card-body">
+	        アイテム2のコンテンツ<br>
+	        あああ
+	      </div><!-- /.card-body -->
+	    </div><!-- /.collapse -->
+	  </div><!-- /.card -->
+	  <div class="card">
+	    <div class="card-header" role="tab" id="headingThree">
+	      <h5 class="mb-0">
+	        <a class="collapsed text-dark" data-toggle="collapse" href="#collapseThree" role="button" aria-expanded="false" aria-controls="collapseThree">
+	          アイテム3
+	        </a>
+	      </h5>
+	    </div><!-- /.card-header -->
+	    <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree" data-parent="#accordion">
+	      <div class="card-body">
+	        アイテム3のコンテンツ
+	      </div><!-- /.card-body -->
+	    </div><!-- /.collapse -->
+	  </div><!-- /.card -->
+	</div><!-- /#accordion -->
+	    <div class="row">
+	   <div class="col-md-12 col-md-offset-3">
+
+		<p>Now <span>Fri Mar 09 22:22:19 JST 2018</span></p>
+		<br />
+          <form action="check" th:object="${excelForm}" method="post" class="form-horizontal">
+           <div class="form-group">
+              <div class="col-md-12">
+                <button type="submit" class="btn btn-primary btn-block" value="send">チェック実行</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="input_name" class="control-label">ID</label>
+                 <p th:if="${#fields.hasErrors('*{targetId}')}" th:errors="*{targetId}" class="col-sm-offset-2 text-danger"></p>
+                <input type="text" class="form-control" id="login_name" placeholder="ID" th:field="*{targetId}" /><br />
+            </div>
+			<div class="form-row">
+	            <div class="col">
+	            	<p>oldJson</p>
+	            	<p th:if="${#fields.hasErrors('*{oldJson}')}" th:errors="*{oldJson}" class="col-sm-offset-2 text-danger"></p>
+					<textarea rows="50" cols="500" class="form-control" id="inputTextarea" placeholder="oldJson" name="oldJson"  th:field="*{oldJson}"></textarea>
+	            </div>
+
+	            <div class="col">
+	            	<p>newJson</p>
+	            	<p th:if="${#fields.hasErrors('*{newJson}')}" th:errors="*{newJson}" class="col-sm-offset-2 text-danger"></p>
+	 				<textarea rows="50" cols="500" class="form-control" id="inputTextarea" placeholder="newJson" name="newJson"  th:field="*{newJson}"></textarea>
+	            </div>
+	        </div>
+
+
+        　</form>
+    　 </div>
+    </div>
+</body>
+</html>
