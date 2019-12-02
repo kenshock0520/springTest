@@ -18,12 +18,12 @@ import com.example.springTest.domain.service.TestService;
 @RequestMapping(value = "/upsert")
 public class UpsertController {
 
-    @Autowired
-    TestService testService;
+	@Autowired
+	TestService testService;
 
-    @RequestMapping(value = "/upsert", method = RequestMethod.GET)
-    public String doUpsert() {
-    	testService.doUpsert();
-        return "OK";
-    }
+	@RequestMapping(value = "/upsert", method = RequestMethod.GET)
+	public String doUpsert() {
+//    	testService.doUpsert();
+		return "OK";
+	}
 }

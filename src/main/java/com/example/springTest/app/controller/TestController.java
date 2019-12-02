@@ -20,11 +20,12 @@ import com.example.springTest.domain.service.TestService;
 @RestController
 public class TestController {
 
-    @Autowired
-    TestService testService;
+	@Autowired
+	TestService testService;
 
-    @RequestMapping(value = "test", method = RequestMethod.GET)
-    public List<TrnTest> getTests() {
-        return testService.getTests();
-    }
+	@RequestMapping(value = "test", method = RequestMethod.GET)
+	public List<TrnTest> getTests() {
+//        return testService.getTests();
+		return null;
+	}
 }

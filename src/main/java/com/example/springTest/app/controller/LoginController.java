@@ -23,13 +23,13 @@ import com.example.springTest.domain.service.TestService;
 @Controller
 public class LoginController {
 
-    @Autowired
-    TestService testService;
+	@Autowired
+	TestService testService;
 
-    @Value("${test.value}")
-    String value;
+	@Value("${test.value}")
+	String value;
 
-	@RequestMapping(value = {"/login"}, method = {RequestMethod.GET})
+	@RequestMapping(value = { "/login" }, method = { RequestMethod.GET })
 	public ModelAndView index(@ModelAttribute LoginForm form) {
 
 		// 生成
@@ -49,9 +49,8 @@ public class LoginController {
 	}
 
 	// POST用のパラメータを受け取る
-	@RequestMapping(value = {"/formPost"}, method = {RequestMethod.POST})
-	public ModelAndView postTest1(
-			@ModelAttribute LoginForm form) {
+	@RequestMapping(value = { "/formPost" }, method = { RequestMethod.POST })
+	public ModelAndView postTest1(@ModelAttribute LoginForm form) {
 
 		// 生成
 		ModelAndView mv = new ModelAndView();
@@ -63,17 +62,15 @@ public class LoginController {
 		mv.addObject("form", form);
 
 		System.out.println("格納");
-		mv.addObject("data", testService.getTests());
-		mv.addObject("dataValue",value);
+		mv.addObject("dataValue", value);
 
 		// 返却
 		return mv;
 	}
 
 	// GET用のパラメータを受け取る
-	@RequestMapping(value = {"/formPost"}, method = {RequestMethod.GET})
-	public ModelAndView getTest1(
-			@ModelAttribute LoginForm form) {
+	@RequestMapping(value = { "/formPost" }, method = { RequestMethod.GET })
+	public ModelAndView getTest1(@ModelAttribute LoginForm form) {
 
 		// 生成
 		ModelAndView mv = new ModelAndView();
@@ -85,8 +82,8 @@ public class LoginController {
 		mv.addObject("form", form);
 
 		System.out.println("格納");
-		mv.addObject("data", testService.getTests());
-		mv.addObject("dataValue",value);
+//		mv.addObject("data", testService.getTests());
+		mv.addObject("dataValue", value);
 
 		// 返却
 		return mv;
