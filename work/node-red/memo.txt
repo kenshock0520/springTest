@@ -1,0 +1,471 @@
+[
+    {
+        "id": "edb37766.d79118",
+        "type": "tab",
+        "label": "フロー 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "b2306926.b523a8",
+        "type": "http in",
+        "z": "edb37766.d79118",
+        "name": "",
+        "url": "/getSample/*",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 280,
+        "wires": [
+            [
+                "8084b2ea.2b456",
+                "e44e89bd.c39808",
+                "e5ae7f57.815c8",
+                "5206413c.8cb91",
+                "6016f58e.55115c"
+            ]
+        ]
+    },
+    {
+        "id": "8084b2ea.2b456",
+        "type": "switch",
+        "z": "edb37766.d79118",
+        "name": "ヘッダ分岐",
+        "property": "req.headers.test",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "TEST",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 1,
+        "x": 450,
+        "y": 120,
+        "wires": [
+            [
+                "e45c099b.10b748"
+            ]
+        ]
+    },
+    {
+        "id": "e44e89bd.c39808",
+        "type": "debug",
+        "z": "edb37766.d79118",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "req.headers",
+        "targetType": "msg",
+        "x": 490,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "e5ae7f57.815c8",
+        "type": "switch",
+        "z": "edb37766.d79118",
+        "name": "ヘッダ分岐2",
+        "property": "req.headers.test",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "TEST2",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 470,
+        "y": 440,
+        "wires": [
+            [
+                "fc5b3881.b0eac8"
+            ]
+        ]
+    },
+    {
+        "id": "fc5b3881.b0eac8",
+        "type": "http response",
+        "z": "edb37766.d79118",
+        "name": "BBB",
+        "statusCode": "202",
+        "headers": {},
+        "x": 670,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "5206413c.8cb91",
+        "type": "switch",
+        "z": "edb37766.d79118",
+        "name": "ヘッダなし",
+        "property": "req.headers.test",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 470,
+        "y": 480,
+        "wires": [
+            [
+                "797cfd9a.706794"
+            ]
+        ]
+    },
+    {
+        "id": "797cfd9a.706794",
+        "type": "http response",
+        "z": "edb37766.d79118",
+        "name": "none",
+        "statusCode": "404",
+        "headers": {},
+        "x": 670,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "6016f58e.55115c",
+        "type": "debug",
+        "z": "edb37766.d79118",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 450,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "f33c58a5.7b92b8",
+        "type": "http request",
+        "z": "edb37766.d79118",
+        "name": "連携",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "http://localhost:8080/springTest/api/test3",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 630,
+        "y": 200,
+        "wires": [
+            [
+                "7acef85d.2d24c8",
+                "7cab5453.c124bc"
+            ]
+        ]
+    },
+    {
+        "id": "7cab5453.c124bc",
+        "type": "function",
+        "z": "edb37766.d79118",
+        "name": "set payload and headers",
+        "func": "\nmsg.headers = {};\nmsg.headers['X-Auth-User'] = msg.payload.result;\nmsg.headers['X-Auth-Key'] = msg.o2.addvalue;\n\nmsg.payload = {\"name\":\"sampleName\",\"age\":199};\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 770,
+        "y": 300,
+        "wires": [
+            [
+                "f315ecd1.e2091"
+            ]
+        ]
+    },
+    {
+        "id": "7acef85d.2d24c8",
+        "type": "debug",
+        "z": "edb37766.d79118",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 830,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "ceaa2ee.d691dd",
+        "type": "http request",
+        "z": "edb37766.d79118",
+        "name": "リクエスト先連携",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": false,
+        "url": "{{{requestUrl}}}",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 1050,
+        "y": 380,
+        "wires": [
+            [
+                "82d3dc9f.f3f96",
+                "2746b139.02214e"
+            ]
+        ]
+    },
+    {
+        "id": "82d3dc9f.f3f96",
+        "type": "http response",
+        "z": "edb37766.d79118",
+        "name": "レスポンス返却",
+        "statusCode": "",
+        "headers": {},
+        "x": 1050,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "e45c099b.10b748",
+        "type": "change",
+        "z": "edb37766.d79118",
+        "name": "addvalue",
+        "rules": [
+            {
+                "t": "set",
+                "p": "o2.addvalue",
+                "pt": "msg",
+                "to": "testValue123",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "o2.reqHeader",
+                "pt": "msg",
+                "to": "req.headers",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "o2.req.url",
+                "pt": "msg",
+                "to": "req.url",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "o2.req.method",
+                "pt": "msg",
+                "to": "req.method",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "o2.req.query",
+                "pt": "msg",
+                "to": "req.query",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 60,
+        "wires": [
+            [
+                "f33c58a5.7b92b8"
+            ]
+        ]
+    },
+    {
+        "id": "f315ecd1.e2091",
+        "type": "change",
+        "z": "edb37766.d79118",
+        "name": "リクエスト先情報設定",
+        "rules": [
+            {
+                "t": "set",
+                "p": "requestUrl",
+                "pt": "msg",
+                "to": "http://localhost:8080/springTest/api/test4",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "method",
+                "pt": "msg",
+                "to": "req.method",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1080,
+        "y": 240,
+        "wires": [
+            [
+                "ceaa2ee.d691dd"
+            ]
+        ]
+    },
+    {
+        "id": "e46021b6.daf4c",
+        "type": "http in",
+        "z": "edb37766.d79118",
+        "name": "",
+        "url": "/getSample/*",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 340,
+        "wires": [
+            [
+                "8084b2ea.2b456",
+                "e5ae7f57.815c8",
+                "5206413c.8cb91",
+                "e44e89bd.c39808",
+                "6016f58e.55115c"
+            ]
+        ]
+    },
+    {
+        "id": "10230906.09bda7",
+        "type": "http in",
+        "z": "edb37766.d79118",
+        "name": "",
+        "url": "/getSample/*",
+        "method": "put",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 400,
+        "wires": [
+            [
+                "5206413c.8cb91",
+                "e5ae7f57.815c8",
+                "e44e89bd.c39808",
+                "6016f58e.55115c",
+                "8084b2ea.2b456"
+            ]
+        ]
+    },
+    {
+        "id": "4b968234.03cacc",
+        "type": "http in",
+        "z": "edb37766.d79118",
+        "name": "",
+        "url": "/getSample/*",
+        "method": "delete",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 100,
+        "y": 460,
+        "wires": [
+            [
+                "e5ae7f57.815c8",
+                "8084b2ea.2b456",
+                "5206413c.8cb91",
+                "e44e89bd.c39808",
+                "6016f58e.55115c"
+            ]
+        ]
+    },
+    {
+        "id": "e7e7d7e4.7c5898",
+        "type": "http in",
+        "z": "edb37766.d79118",
+        "name": "",
+        "url": "/getSample/*",
+        "method": "patch",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 540,
+        "wires": [
+            [
+                "8084b2ea.2b456",
+                "e5ae7f57.815c8",
+                "5206413c.8cb91",
+                "e44e89bd.c39808",
+                "6016f58e.55115c"
+            ]
+        ]
+    },
+    {
+        "id": "e7297b7c.64bf78",
+        "type": "comment",
+        "z": "edb37766.d79118",
+        "name": "フローコメント",
+        "info": "テストコメント",
+        "x": 180,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "2746b139.02214e",
+        "type": "debug",
+        "z": "edb37766.d79118",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 870,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "3c547f91.901ac",
+        "type": "complete",
+        "z": "edb37766.d79118",
+        "name": "",
+        "scope": [
+            "e46021b6.daf4c"
+        ],
+        "uncaught": false,
+        "x": 120,
+        "y": 700,
+        "wires": [
+            [
+                "3cd3d871.185ff8"
+            ]
+        ]
+    },
+    {
+        "id": "3cd3d871.185ff8",
+        "type": "debug",
+        "z": "edb37766.d79118",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 340,
+        "y": 720,
+        "wires": []
+    }
+]
